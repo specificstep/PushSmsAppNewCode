@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SMS Forwarder</string>
+    <string name="add_mobile_title">Add Mobile</string>
+    <string name="add_mobile">Mobile</string>
+    <string name="submit">Submit</string>
+    <string name="show">show</string>
+</resources>
