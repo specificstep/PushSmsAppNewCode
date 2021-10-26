@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         initialize();
 
-        if(NewTimerService.hourglass == null) {
+        if (NewTimerService.hourglass == null) {
             startService(new Intent(this, NewTimerService.class));
             txtBackgroundState.setText("Stop Background Service");
             stateBackground = 1;
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         } else {
             getDeviceId();
-             getIMEINumber();
+            getIMEINumber();
             getSimId();
             System.out.println("Imei no:" + sharedpreferences.getString(ImeiNo, ""));
         }
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Intent intent = new Intent();
             String packageName = getPackageName();
             PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         lnrTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stateBackground == 0) {
+                if (stateBackground == 0) {
                     NewTimerService.hourglass.resumeTimer();
                     txtBackgroundState.setText("Stop Background Service");
                     stateBackground = 1;
@@ -294,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onStop();
     }
+
     @Override
     public void onDestroy() {
         stopService(new Intent(this, NewTimerService.class));
@@ -304,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateGUI(Intent intent) {
         if (intent.getExtras() != null) {
             long millisUntilFinished = intent.getLongExtra("countdown", 0);
-            System.out.println("Countdown seconds remaining: " +  millisUntilFinished / 1000);
+            System.out.println("Countdown seconds remaining: " + millisUntilFinished / 1000);
             txtRestartTimer.setText(millisUntilFinished / 1000 + "");
         }
     }

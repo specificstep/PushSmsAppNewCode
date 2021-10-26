@@ -37,8 +37,8 @@ public class NewTimerService extends Service {
     DatabaseHandler db;
     List<MesaageHistory> mesaageHistoryList;
     MesaageHistory mesaageHistory;
-    //String urlData1 = "http://portal.specificstep.com/sendnotificationkan.php?sim_no=";
-    String urlData1 = "http://portal.specificstep.com/sendnotification.php?sim_no=";
+    String urlData1 = "http://portal.specificstep.com/sendnotificationkan.php?sim_no=";
+//    String urlData1 = "http://portal.specificstep.com/sendnotification.php?sim_no=";
     //String urlData1 = "https://api.telegram.org/bot454849060:AAFLLOx4IH8bJWVhxw3_qm7JpyiieVlGDZs/sendMessage?chat_id=-284238239&parse_mode=html&&text=";
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefsDetail" ;
