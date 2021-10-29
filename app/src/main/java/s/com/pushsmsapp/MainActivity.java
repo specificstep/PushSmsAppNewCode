@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     String urlData = "http://api.telegram.org/bot454849060:AAFLLOx4IH8bJWVhxw3_qm7JpyiieVlGDZs/sendMessage?chat_id=-284238239&parse_mode=html&&text=";
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private static final int REQUEST_READ_PHONE_STATE = 2;
-    CardView cardAuthorize, cardHistory;
+    CardView cardAuthorize, cardHistory, emailList;
     private TransparentProgressDialog transparentProgressDialog;
     TextView txtBackgroundState;
     String otp_generated;
@@ -133,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MessageHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+        emailList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllEmailListActivity.class);
                 startActivity(intent);
             }
         });
@@ -328,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHandler(this);
         cardAuthorize = (CardView) findViewById(R.id.cardAuthorize);
         cardHistory = (CardView) findViewById(R.id.cardHistory);
+        emailList = (CardView) findViewById(R.id.emailList);
         txtRestartTimer = (TextView) findViewById(R.id.txtTimerRestartText);
         lnrRestartTimer = (LinearLayout) findViewById(R.id.lnrRestartTimer);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);

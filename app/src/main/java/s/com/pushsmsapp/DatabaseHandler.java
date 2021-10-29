@@ -27,6 +27,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_AUTHMESSAGE = "message";
     private static final String KEY_MSGNOCONTAIN = "msgnocontain";
 
+    private static final String TABLE_EMAILDETAIL = "Emaildetail";
+    private static final String KEY_EMALID = "id";
+    private static final String KEY_EMAILNAME = "emailname";
+    private static final String KEY_EMAILBODY = "emailbody";
+    private static final String KEY_EMAILSUBJECT = "emailsubject";
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
@@ -43,8 +49,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_AUTHCONTACTS_TABLE = "CREATE TABLE " + TABLE_AUTHCONTACTS + "("
                 + KEY_AUTHID + " INTEGER PRIMARY KEY," + KEY_AUTHSENDER + " TEXT,"
                 + KEY_AUTHMESSAGE + " TEXT," + KEY_MSGNOCONTAIN + " TEXT" + ")";
+        String CREATE_EMAILDETAIL_TABLE = "CREATE TABLE " + TABLE_EMAILDETAIL + "("
+                + KEY_EMALID + " INTEGER PRIMARY KEY," + KEY_EMAILNAME + " TEXT,"
+                + KEY_EMAILBODY + " TEXT," + KEY_EMAILSUBJECT + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
         db.execSQL(CREATE_AUTHCONTACTS_TABLE);
+        db.execSQL(CREATE_EMAILDETAIL_TABLE);
     }
 
     // Upgrading database
@@ -53,6 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_AUTHCONTACTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMAILDETAIL);
         // Create tables again
         onCreate(db);
     }
@@ -190,6 +201,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
+    void addEmaildetail(EmailDetailsListModel contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_EMAILNAME, contact.getEmailid()); // Contact Name
+        values.put(KEY_EMAILBODY, contact.getEmailbody()); // Contact Phone
+        values.put(KEY_EMAILSUBJECT, contact.getEmailsubject()); // Contact Phone
+
+        // Inserting Row
+        db.insert(TABLE_EMAILDETAIL, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
 
     // code to get the single contact
     AuthorizeSenderClass getAuthContact(int id) {
@@ -275,6 +299,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    public List<EmailDetailsListModel> getAllEmailidDetails() {
+        List<EmailDetailsListModel> contactList = new ArrayList<EmailDetailsListModel>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_EMAILDETAIL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                EmailDetailsListModel contact = new EmailDetailsListModel();
+                contact.set_eid(Integer.parseInt(cursor.getString(0)));
+                contact.setEmailid(cursor.getString(1));
+                contact.setEmailbody(cursor.getString(2));
+                contact.setEmailsubject(cursor.getString(3));
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
+    }
 
 
 }
