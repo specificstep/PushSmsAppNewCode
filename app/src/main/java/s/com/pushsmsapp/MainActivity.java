@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     private TransparentProgressDialog transparentProgressDialog;
     TextView txtBackgroundState;
     String otp_generated;
-
     DatabaseHandler db;
     String message;
     String sendername;

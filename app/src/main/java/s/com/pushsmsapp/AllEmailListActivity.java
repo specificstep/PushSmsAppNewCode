@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -18,6 +20,7 @@ public class AllEmailListActivity extends AppCompatActivity {
     public static List<EmailDetailsListModel> data;
     DatabaseHandler db;
     FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,5 +42,12 @@ public class AllEmailListActivity extends AppCompatActivity {
         emailListAdapter = new EmailListAdapter(AllEmailListActivity.this, data);
         emaillistrecyclerview.setAdapter(emailListAdapter);
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AllEmailListActivity.this, SendEmailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

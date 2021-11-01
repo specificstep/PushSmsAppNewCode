@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@android:color/white">
+        android:paddingRight="20dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAuthorize"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="@drawable/roundcornerbackground"
             android:backgroundTint="@color/random1"
-            android:layout_marginTop="20dp"
             card_view:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical|center_horizontal">
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_contacts"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:background="@null"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/ic_contacts" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/common_title_size"
-                android:text="Authorize Contact List" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Authorize Contact List"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/common_title_size" />
 
             </LinearLayout>
 
@@ -57,67 +57,69 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="@drawable/roundcornerbackground"
             android:backgroundTint="@color/random2"
-            android:layout_marginTop="20dp"
             card_view:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical|center_horizontal">
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_message"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:background="@null"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/ic_message" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Message History"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/common_title_size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Message History"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/common_title_size" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/emailList"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="@drawable/roundcornerbackground"
             android:backgroundTint="@color/random2"
-            android:layout_marginTop="20dp"
             card_view:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical|center_horizontal">
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_message"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:background="@null"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/email_ic"
+                    app:tint="@color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Conatct List"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/common_title_size" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Email Conatct List"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/common_title_size" />
 
             </LinearLayout>
 
@@ -127,37 +129,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/roundcornerbackground"
             android:layout_marginTop="20dp"
+            android:background="@drawable/roundcornerbackground"
             card_view:cardCornerRadius="20dp">
 
-        <LinearLayout
-            android:id="@+id/lnrBackgroundState"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@color/colorGreen"
-            android:gravity="center_vertical|center_horizontal">
+            <LinearLayout
+                android:id="@+id/lnrBackgroundState"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorGreen"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_time"
-                android:gravity="center_horizontal"
-                android:background="@null"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/ic_time" />
 
-            <TextView
-                android:id="@+id/txtBackgroundState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start background Service"
-                android:background="@null"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/common_title_size"
-                android:textColor="@color/colorWhite"/>
+                <TextView
+                    android:id="@+id/txtBackgroundState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:gravity="center_horizontal"
+                    android:text="Start background Service"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/common_title_size" />
 
-        </LinearLayout>
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -165,36 +167,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/roundcornerbackground"
             android:layout_marginTop="20dp"
+            android:background="@drawable/roundcornerbackground"
             card_view:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:id="@+id/lnrRestartTimer"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal"
                 android:background="@color/colorGreen"
-                android:gravity="center_vertical|center_horizontal">
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txtTimerRestartText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@null"
                     android:gravity="center_horizontal"
-                    android:textSize="@dimen/common_title_size"
                     android:textColor="@color/colorWhite"
-                    android:background="@null"/>
+                    android:textSize="@dimen/common_title_size" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Restart Timer"
-                    android:background="@null"
                     android:layout_marginLeft="10dp"
+                    android:background="@null"
                     android:gravity="center_horizontal"
-                    android:textSize="@dimen/common_title_size"
-                    android:textColor="@color/colorWhite"/>
+                    android:text="Restart Timer"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/common_title_size" />
 
             </LinearLayout>
 

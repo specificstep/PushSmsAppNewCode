@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android%20studio%20setup%20download/sdk/icons/material/materialicons/add/baseline_add_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android%20studio%20setup%20download/sdk/icons/material/materialicons/email/baseline_email_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_add" />
+                            <entry key="outputName" value="email_ic" />
                             <entry key="sourceFile" value="C:\Users\ssuspl-android" />
                           </map>
                         </option>
