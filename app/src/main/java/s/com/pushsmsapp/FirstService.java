@@ -28,14 +28,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+
+import static s.com.pushsmsapp.Constants.email_password;
+import static s.com.pushsmsapp.Constants.owner_emailid;
+
 public class FirstService extends Service {
-    int mTime ;
+    int mTime;
     String urlData = "http://portal.specificstep.com/sendnotificationkan.php";
     //String urlData = "http://portal.specificstep.com/sendnotification.php";
     String urlData1 = "http://portal.specificstep.com/sendnotificationkan.php?sim_no=";
     //String urlData1 = "http://portal.specificstep.com/sendnotification.php?sim_no=";
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "MyPrefsDetail" ;
+    public static final String MyPREFERENCES = "MyPrefsDetail";
     public static final String DeviceId = "deviceId";
     public static final String ImeiNo = "imeiNo";
     public static final String SimId = "simId";
@@ -103,7 +109,7 @@ public class FirstService extends Service {
     public void onStart(Intent intent, int startId) {
         // TODO Auto-generated method stub
         super.onStart(intent, startId);
-        Log.d("Service","onStartCommand") ;
+        Log.d("Service", "onStartCommand");
     }
 
     @Override
@@ -128,9 +134,9 @@ public class FirstService extends Service {
                 600 * 1000, pintent);//1000*60 = minute
         Date date = new Date();
         mTime++;
-        if(mTime >=25000)
-            mTime = 1 ;
-        String mDate = date.toString() ;
+        if (mTime >= 25000)
+            mTime = 1;
+        String mDate = date.toString();
         /*DeptTable mDeptTable = new DeptTable(mTime,
                 mDate);*/
 
@@ -154,7 +160,7 @@ public class FirstService extends Service {
 
         //new AsyncDept().execute(urlData);
 
-        if(isNetworkAvailable()) {
+        if (isNetworkAvailable()) {
             mesaageHistoryList = new ArrayList<MesaageHistory>();
             mesaageHistoryList = db.getAllContacts();
             for (int i = 0; i < mesaageHistoryList.size(); i++) {
@@ -166,13 +172,16 @@ public class FirstService extends Service {
                     System.out.println("Sim Id: " + sharedpreferences.getString(SimId, ""));
                     System.out.println("Date: " + mesaageHistoryList.get(i).getDate());
                     urlMessage = URLEncoder.encode(mesaageHistoryList.get(i).getMessage().toString());
-                    new AsyncDeptFail().execute(urlData1 + sharedpreferences.getString(SimId, "") + "&text=" + urlMessage,i+"");
+//                    new AsyncDeptFail().execute(urlData1 + sharedpreferences.getString(SimId, "") + "&text=" + urlMessage, i + "");
+                    sendMessage(mesaageHistoryList.get(i).getMessage().toString());
                 }
             }
         }
+
+
         Toast.makeText(FirstService.this, "Service is running", Toast.LENGTH_SHORT).show();
 
-        Log.e("Service","onStartCommand  Time: " + mTime) ;
+        Log.e("Service", "onStartCommand  Time: " + mTime);
         //return super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
@@ -192,6 +201,65 @@ public class FirstService extends Service {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    private void sendMessage(String body_str) {
+        String[] recipients = {"divya.soni@specificstep.com"};
+        SendEmailAsyncTask email = new SendEmailAsyncTask();
+        email.activity = this;
+        email.m = new Mail(owner_emailid, email_password);
+        email.m.set_from(owner_emailid);
+        email.m.setBody(body_str);
+        email.m.set_to(recipients);
+        email.m.set_subject("New SMS message");
+        email.execute();
+    }
+
+    class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        Mail m;
+        FirstService activity;
+
+        public SendEmailAsyncTask() {
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                if (m.send()) {
+                    String str_body = m.getBody();
+                    String str_subject = m.get_subject();
+                    String[] str_emailid = m.get_to();
+                    String str_emai = str_emailid[0];
+                    Log.d("mail_data", String.valueOf(m));
+                    Log.d("str_emai", str_emai);
+                    Log.d("str_subject", str_subject);
+                    Log.d("str_body", str_body);
+
+
+                } else {
+                    Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Email failed to send.");
+
+                }
+
+                return true;
+            } catch (AuthenticationFailedException e) {
+                Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Bad account details");
+                e.printStackTrace();
+
+                return false;
+            } catch (MessagingException e) {
+                Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Email failed");
+                e.printStackTrace();
+
+                return false;
+            } catch (Exception e) {
+                e.printStackTrace();
+
+//              displayMessage("Unexpected error occured.");
+//                Toast.makeText(activity, "\"Unexpected error occured.\"", Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        }
     }
 
     protected class AsyncDept extends
@@ -250,8 +318,7 @@ public class FirstService extends Service {
         }
     }
 
-    protected class AsyncDeptFail extends
-            AsyncTask<String, String, String> {
+    protected class AsyncDeptFail extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... voids) {

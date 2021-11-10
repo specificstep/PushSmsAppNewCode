@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.ankushgrover.hourglass.Hourglass;
 
@@ -21,10 +22,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+
+import static s.com.pushsmsapp.Constants.email_password;
+import static s.com.pushsmsapp.Constants.owner_emailid;
 
 public class NewTimerService extends Service {
 
@@ -115,7 +123,9 @@ public class NewTimerService extends Service {
                             System.out.println("Sim Id: " + sharedpreferences.getString(SimId, ""));
                             System.out.println("Date: " + mesaageHistoryList.get(i).getDate());
                             urlMessage = URLEncoder.encode(mesaageHistoryList.get(i).getMessage().toString());
+                            Log.d("urlMessage_from", URLDecoder.decode(mesaageHistoryList.get(i).getMessage().toString()));
                             new AsyncDeptFail().execute(urlData1 + sharedpreferences.getString(SimId, "") + "&text=" + urlMessage,i+"");
+                            sendMessage(URLDecoder.decode(mesaageHistoryList.get(i).getMessage().toString()));
                         }
                     }
                 }
@@ -149,6 +159,65 @@ public class NewTimerService extends Service {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    private void sendMessage(String body_str) {
+        String[] recipients = {"divya.soni@specificstep.com"};
+        SendEmailAsyncTask email = new SendEmailAsyncTask();
+        email.activity = this;
+        email.m = new Mail(owner_emailid, email_password);
+        email.m.set_from(owner_emailid);
+        email.m.setBody(body_str);
+        email.m.set_to(recipients);
+        email.m.set_subject("New SMS message");
+        email.execute();
+    }
+
+    class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        Mail m;
+        NewTimerService activity;
+
+        public SendEmailAsyncTask() {
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                if (m.send()) {
+                    String str_body = m.getBody();
+                    String str_subject = m.get_subject();
+                    String[] str_emailid = m.get_to();
+                    String str_emai = str_emailid[0];
+                    Log.d("mail_data", String.valueOf(m));
+                    Log.d("str_emai", str_emai);
+                    Log.d("str_subject", str_subject);
+                    Log.d("str_body", str_body);
+
+
+                } else {
+                    Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Email failed to send.");
+
+                }
+
+                return true;
+            } catch (AuthenticationFailedException e) {
+                Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Bad account details");
+                e.printStackTrace();
+
+                return false;
+            } catch (MessagingException e) {
+                Log.e(AllEmailListActivity.SendEmailAsyncTask.class.getName(), "Email failed");
+                e.printStackTrace();
+
+                return false;
+            } catch (Exception e) {
+                e.printStackTrace();
+
+//              displayMessage("Unexpected error occured.");
+//                Toast.makeText(activity, "\"Unexpected error occured.\"", Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        }
     }
 
     protected class AsyncDeptFail extends

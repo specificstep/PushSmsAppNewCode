@@ -4,4 +4,20 @@
     <string name="add_mobile">Mobile</string>
     <string name="submit">Submit</string>
     <string name="show">show</string>
+
+    <string name="password_fragment_title_enter_new">Enter new password:</string>
+    <string name="password_fragment_edit_placeholder">Password</string>
+    <string name="password_fragment_enter">Enter</string>
+    <string name="dialog_title">Do you want to send a test message to this filter?</string>
+    <string name="message_text">Message text</string>
+    <string name="cancel_text">CANCEL</string>
+    <string name="send_text">SEND</string>
+    <string name="test_filter_description">Do you want to send a test \n message to this filter?</string>
+    <string name="test_filter_title">Test Message:</string>
+    <string name="cancel">Cancel</string>
+    <string name="send">send</string>
+    <string name="filter_edit_simple_goal_input">E-mail Addressr</string>
+    <string name="filter_forward_help_text">Where SMS information will be sent</string>
+    <string name="filter_edit_simple_goal_title">Enter email address to which you want to transfer (synchronize) incoming SMS:</string>
+
 </resources>

@@ -13,5 +13,6 @@
 
     <color name="random1">#00BCD4</color>
     <color name="random2">#E7658A</color>
+    <color name="colorDark">#000000</color>
 
 </resources>

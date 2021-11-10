@@ -16,6 +16,8 @@ import java.util.concurrent.ExecutionException;
 
 public class Constants {
 
+    public  static  String owner_emailid="noreplyobjectcodes@gmail.com";
+    public  static  String email_password="Project$$567";
     public static AlertDialog dialog;
 
     public static boolean checkInternet(Activity activity) {

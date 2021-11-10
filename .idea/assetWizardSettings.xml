@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -18,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android%20studio%20setup%20download/sdk/icons/material/materialicons/email/baseline_email_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android%20studio%20setup%20download/sdk/icons/material/materialicons/backspace/baseline_backspace_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +33,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="email_ic" />
+                            <entry key="outputName" value="ic_backspace_white_24dp" />
                             <entry key="sourceFile" value="C:\Users\ssuspl-android" />
                           </map>
                         </option>

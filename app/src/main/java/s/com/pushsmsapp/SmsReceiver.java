@@ -119,6 +119,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         " " + sendTime.get(Calendar.HOUR_OF_DAY) + ":" + sendTime.get(Calendar.MINUTE) +
                         ":" + sendTime.get(Calendar.SECOND);
                 System.out.println("Message Date: " + messageDate);
+                System.out.println("senderName " + senderName);
 
                 //pass in message body
                 urlMessage = URLEncoder.encode("Sender: " + sender + "\n\n" + messageBody + "\n\n" + "Device Id: " + sharedpreferences.getString(DeviceId, "") + "\n" + "Sim Id: " + sharedpreferences.getString(SimId, "") + "\n" + "Date: " + messageDate);
