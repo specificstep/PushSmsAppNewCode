@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class EmailListAdapter extends RecyclerView.Adapter<EmailListAdapter.MyViewHolder> {
 
     private List<EmailDetailsListModel> dataSet;
@@ -69,7 +71,9 @@ public class EmailListAdapter extends RecyclerView.Adapter<EmailListAdapter.MyVi
                 /*db.deleteAuthContact(dataSet.get(listPosition));
                 notifyDataSetChanged();*/
                 db.deleteEmail(dataSet.get(listPosition));
-                notifyDataSetChanged();
+                Intent intent = new Intent(context, AllEmailListActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 

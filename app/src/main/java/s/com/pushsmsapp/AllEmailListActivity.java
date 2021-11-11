@@ -172,9 +172,9 @@ public class AllEmailListActivity extends AppCompatActivity {
 
                     db.updateEmailContact(new EmailDetailsListModel(str_emai, str_body, str_subject.toString()));
                     emailDetailsListModels = db.getAllEmailidDetails();
-                    emailListAdapter = new EmailListAdapter(AllEmailListActivity.this, data);
-                    emaillistrecyclerview.setAdapter(emailListAdapter);
-
+//                    emailListAdapter = new EmailListAdapter(AllEmailListActivity.this, data);
+//                    emaillistrecyclerview.setAdapter(emailListAdapter);
+                    emailListAdapter.notifyDataSetChanged();
                     Log.d("emailDetailsListModels", String.valueOf(emailDetailsListModels.size()));
                     runOnUiThread(new Runnable() {
                         public void run() {

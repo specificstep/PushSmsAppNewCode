@@ -58,7 +58,7 @@ public class SendEmailActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                sendMessage();
 
-                db.addEmaildetail(new EmailDetailsListModel(editTextGoal.getText().toString(), "", ""));
+                db.addEmaildetail(new EmailDetailsListModel(editTextGoal.getText().toString(), "New SMS message", "Test"));
 
                 Intent intent = new Intent(SendEmailActivity.this, AllEmailListActivity.class);
                 intent.putExtra("email_address", editTextGoal.getText().toString().trim());
