@@ -127,14 +127,18 @@ public class AllEmailListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(AllEmailListActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
     private void sendMessage(String body_str) {
-        List<String> emailList= new ArrayList<String>();
-        emailList.add("divya.soni@specificstep.com");
-        emailList.add("divya.soni@specificstep.in");
+        emailDetailsListModels = db.getAllEmailidDetails();
+        List<String> emailList = new ArrayList<String>();
+
+        for (int i = 0; i < emailDetailsListModels.size(); i++) {
+            emailList.add(emailDetailsListModels.get(i).getEmailid());
+        }
         String[] recipients = emailList.toArray(new String[emailList.size()]);
         SendEmailAsyncTask email = new SendEmailAsyncTask();
         email.activity = this;
@@ -166,8 +170,11 @@ public class AllEmailListActivity extends AppCompatActivity {
                     Log.d("str_subject", str_subject);
                     Log.d("str_body", str_body);
 
-                    db.addEmaildetail(new EmailDetailsListModel(str_emai, str_body, str_subject.toString()));
+                    db.updateEmailContact(new EmailDetailsListModel(str_emai, str_body, str_subject.toString()));
                     emailDetailsListModels = db.getAllEmailidDetails();
+                    emailListAdapter = new EmailListAdapter(AllEmailListActivity.this, data);
+                    emaillistrecyclerview.setAdapter(emailListAdapter);
+
                     Log.d("emailDetailsListModels", String.valueOf(emailDetailsListModels.size()));
                     runOnUiThread(new Runnable() {
                         public void run() {

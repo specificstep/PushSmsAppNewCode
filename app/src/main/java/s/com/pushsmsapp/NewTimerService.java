@@ -138,7 +138,6 @@ public class NewTimerService extends Service {
 
     @Override
     public void onDestroy() {
-
         //cdt.cancel();
         System.out.println("Timer cancelled");
         super.onDestroy();

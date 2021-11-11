@@ -270,12 +270,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_AUTHCONTACTS, values, KEY_AUTHID + " = ?",
                 new String[] { String.valueOf(contact.get_authid()) });
     }
+    public int updateEmailContact(EmailDetailsListModel contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_EMAILNAME, contact.getEmailid()); // Contact Name
+        values.put(KEY_EMAILBODY, contact.getEmailbody()); // Contact Phone
+        values.put(KEY_EMAILSUBJECT, contact.getEmailsubject()); // Contact Phone
+
+        // updating row
+        return db.update(TABLE_EMAILDETAIL, values, KEY_EMALID + " = ?",
+                new String[] { String.valueOf(contact.getEmailid()) });
+    }
 
     // Deleting single contact
     public void deleteAuthContact(AuthorizeSenderClass contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_AUTHCONTACTS, KEY_AUTHID + " = ?",
                 new String[] { String.valueOf(contact.get_authid()) });
+        db.close();
+    }
+
+    public void deleteEmail(EmailDetailsListModel contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_EMAILDETAIL, KEY_EMALID + " = ?",
+                new String[]{String.valueOf(contact.get_eid())});
         db.close();
     }
 

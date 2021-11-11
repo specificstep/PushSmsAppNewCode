@@ -57,13 +57,15 @@ public class SendEmailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                sendMessage();
+
+                db.addEmaildetail(new EmailDetailsListModel(editTextGoal.getText().toString(), "", ""));
+
                 Intent intent = new Intent(SendEmailActivity.this, AllEmailListActivity.class);
                 intent.putExtra("email_address", editTextGoal.getText().toString().trim());
                 startActivity(intent);
             }
         });
     }
-
 
 
     @Override

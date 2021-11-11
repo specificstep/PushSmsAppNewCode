@@ -54,7 +54,7 @@ public class EmailListAdapter extends RecyclerView.Adapter<EmailListAdapter.MyVi
     public void onBindViewHolder(final EmailListAdapter.MyViewHolder holder, final int listPosition) {
 
         holder.txtSender.setText("Contact: " + dataSet.get(listPosition).getEmailid());
-        if(!TextUtils.isEmpty(dataSet.get(listPosition).getEmailbody())) {
+        if (!TextUtils.isEmpty(dataSet.get(listPosition).getEmailbody())) {
             holder.txtMsg.setText("Message: " + dataSet.get(listPosition).getEmailbody());
             holder.txtMsg.setVisibility(View.VISIBLE);
         } else {
@@ -62,15 +62,16 @@ public class EmailListAdapter extends RecyclerView.Adapter<EmailListAdapter.MyVi
         }
 
 
-//        db = new DatabaseHandler(context);
-//        holder.delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                /*db.deleteAuthContact(dataSet.get(listPosition));
-//                notifyDataSetChanged();*/
-//                AuthorizeContactList.deleteItem(listPosition);
-//            }
-//        });
+        db = new DatabaseHandler(context);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*db.deleteAuthContact(dataSet.get(listPosition));
+                notifyDataSetChanged();*/
+                db.deleteEmail(dataSet.get(listPosition));
+                notifyDataSetChanged();
+            }
+        });
 
 //        holder.edit.setOnClickListener(new View.OnClickListener() {
 //            @Override
